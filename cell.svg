@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 230" role="img" aria-label="A cell that only seals a child when a proof checks">
+  <rect width="800" height="230" rx="16" fill="#f4f6f3"/>
+  <text x="400" y="28" text-anchor="middle" fill="#3d4a3a" font-family="Georgia, serif" font-size="15">a cell proves it got better</text>
+
+  <!-- 1 guess, no seal -->
+  <g transform="translate(100 118)">
+    <ellipse rx="48" ry="36" fill="none" stroke="#b24a4a" stroke-width="3"/>
+    <text y="5" text-anchor="middle" fill="#b24a4a" font-family="ui-monospace, monospace" font-size="12" font-weight="700">0%</text>
+    <rect x="-22" y="38" width="44" height="16" rx="2" fill="none" stroke="#8a9586" stroke-width="1.5"/>
+    <text y="50" text-anchor="middle" fill="#8a9586" font-family="ui-monospace, monospace" font-size="10">??</text>
+    <text y="78" text-anchor="middle" fill="#5b6758" font-family="Georgia, serif" font-size="12">guess</text>
+  </g>
+
+  <path d="M160 118 L208 118" stroke="#8a9586" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- 2 closer, still unsigned -->
+  <g transform="translate(280 118)">
+    <ellipse rx="48" ry="36" fill="none" stroke="#c4a035" stroke-width="3"/>
+    <ellipse rx="22" ry="16" fill="#f3e7b0"/>
+    <text y="5" text-anchor="middle" fill="#8a7018" font-family="ui-monospace, monospace" font-size="12" font-weight="700">40%</text>
+    <rect x="-22" y="38" width="44" height="16" rx="2" fill="none" stroke="#8a9586" stroke-width="1.5"/>
+    <text y="50" text-anchor="middle" fill="#8a9586" font-family="ui-monospace, monospace" font-size="10">??</text>
+    <text y="78" text-anchor="middle" fill="#5b6758" font-family="Georgia, serif" font-size="12">closer</text>
+  </g>
+
+  <path d="M340 118 L388 118" stroke="#8a9586" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- 3 proof checks -->
+  <g transform="translate(470 118)">
+    <ellipse rx="48" ry="36" fill="none" stroke="#2f7a32" stroke-width="3"/>
+    <ellipse rx="36" ry="26" fill="#d7f0c8"/>
+    <text y="5" text-anchor="middle" fill="#2f7a32" font-family="ui-monospace, monospace" font-size="12" font-weight="700">75%</text>
+    <rect x="-22" y="38" width="44" height="16" rx="2" fill="#d7f0c8" stroke="#2f7a32" stroke-width="1.5"/>
+    <text y="50" text-anchor="middle" fill="#2f7a32" font-family="ui-monospace, monospace" font-size="10" font-weight="700">OK</text>
+    <text y="78" text-anchor="middle" fill="#5b6758" font-family="Georgia, serif" font-size="12">proved</text>
+  </g>
+
+  <path d="M530 118 L578 118" stroke="#8a9586" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- 4 sealed child -->
+  <g transform="translate(670 118)">
+    <ellipse rx="48" ry="36" fill="#cfeee9" stroke="#1e6f6a" stroke-width="3"/>
+    <circle r="11" fill="#1e6f6a"/>
+    <text y="4" text-anchor="middle" fill="#f4f6f3" font-family="ui-monospace, monospace" font-size="13" font-weight="700">*</text>
+    <rect x="-26" y="38" width="52" height="16" rx="2" fill="#1e6f6a" stroke="#1e6f6a" stroke-width="1.5"/>
+    <text y="50" text-anchor="middle" fill="#f4f6f3" font-family="ui-monospace, monospace" font-size="10" font-weight="700">sse:→0</text>
+    <text y="78" text-anchor="middle" fill="#5b6758" font-family="Georgia, serif" font-size="12">sealed</text>
+  </g>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L8 4 L0 8 z" fill="#8a9586"/>
+    </marker>
+  </defs>
+</svg>
