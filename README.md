@@ -99,4 +99,5 @@ The scoring function never changes. This is not a Red Queen: the world stays sti
 ## Related
 
 [replicante](https://github.com/PascualMacana/replicante) copies itself.  
-[mejorante](https://github.com/PascualMacana/mejorante) copies itself and also tries to improve, without asking for a proof.
+[mejorante](https://github.com/PascualMacana/mejorante) copies itself and also tries to improve, without asking for a proof.  
+[reinante](https://github.com/PascualMacana/reinante) keeps searching because the scoring function itself moves.
