@@ -1,44 +1,44 @@
 # demostrante
 
-A small Rust program that searches for a better piece of its own source, then **writes a child only if it can prove the change is better**.
+Un programa chico en Rust que busca un pedazo mejor de su propia fuente y **sólo escribe un hijo si puede probar que el cambio es mejor**.
 
-It is not a language model and it does not spread by itself. You point it at a folder; it only writes there.
+No es un modelo de lenguaje y no se copia solo. Le señalás una carpeta; sólo escribe ahí.
 
-It is a sibling of [mejorante](https://github.com/PascualMacana/mejorante). Darwin still proposes (random mutants, frozen scoring). Gödel accepts: a child is born because a certificate checks, not because the searcher got lucky.
+Es hermano de [mejorante](https://github.com/PascualMacana/mejorante). Darwin sigue proponiendo (mutantes al azar, puntaje congelado). Gödel acepta: el hijo nace porque un certificado cierra, no porque el buscador tuvo suerte.
 
-The part that evolves is a tiny math expression called the **brain**. The program tries to match this function:
+Lo que evoluciona es una expresión matemática chica, el **cerebro**. El programa intenta encajar esta función:
 
 ```
 f(x) = x² + 3x + 5
 ```
 
-on `x = -5 … 5`. Score is the sum of squared errors (**sse**). Lower is better. Zero is a perfect fit.
+en `x = -5 … 5`. El puntaje es la suma de errores al cuadrado (**sse**). Más bajo es mejor. Cero es un encaje perfecto.
 
-A proof is just that check, written down:
+Una prueba es esa misma cuenta, escrita:
 
 ```
-parent    brain  0                              sse  4323
-  │ evolve (search)
-  │ prove  (re-evaluate all 11 points)
+padre     cerebro  0                              sse  4323
+  │ evolve (búsqueda)
+  │ prove  (reevalúa los 11 puntos)
   ▼
-child     brain  (+ (+ (* 3 x) (* x x)) 5)      sse  0
-          parent 0
-          proof  sse:4323.0000->0.0000
+hijo      cerebro  (+ (+ (* 3 x) (* x x)) 5)      sse  0
+          padre  0
+          prueba sse:4323.0000->0.0000
 ```
 
-Anyone can re-run the 11 points. If the numbers do not match, the certificate is a lie and nothing is written.
+Cualquiera puede volver a correr los 11 puntos. Si los números no cierran, el certificado es mentira y no se escribe nada.
 
-![A cell that only seals a child when a proof checks](cell.svg)
+![Una célula que sólo sella un hijo cuando la prueba cierra](cell.svg)
 
-Watch it happen in the terminal. The body fills as the error drops. A seal under the cell inks only when the current brain would beat the parent. `dish` defaults to seed 7.
+Míralo en la terminal. El cuerpo se llena mientras baja el error. Un sello debajo de la célula se tinta sólo si el cerebro actual le ganaría al padre. `dish` usa por defecto la seed 7.
 
 ```bash
 cargo run -- dish
 ```
 
-## Run it
+## Cómo correrlo
 
-You need [Rust](https://rustup.rs/).
+Hace falta [Rust](https://rustup.rs/).
 
 ```bash
 cargo build --release
@@ -49,56 +49,56 @@ cargo build --release
 ./hijo/target/debug/demostrante prove
 ```
 
-`identity` prints generation, brain, parent, and whether the proof verifies.  
-`evolve --spawn ./hijo --build` searches, **refuses to write** if there is no improvement, otherwise writes a child that carries the certificate.
+`identity` imprime generación, cerebro, padre, y si la prueba verifica.  
+`evolve --spawn ./hijo --build` busca, **se niega a escribir** si no hay mejora, y si hay escribe un hijo que lleva el certificado.
 
-`spawn ./hijo` without `evolve` copies this genome and does **not** claim an improvement.
+`spawn ./hijo` sin `evolve` copia este genoma y **no** afirma una mejora.
 
-## Commands
+## Comandos
 
 ```
-demostrante identity              generation, lineage, parent, proof, score
-demostrante eval [x]              brain vs the target function
-demostrante prove [expr]          check this individual's proof, or a candidate
-demostrante evolve                search for a better brain
-                 --steps N      search steps (default 120)
-                 --lambda L     mutants per step (default 30)
-                 --seed S       reproducible RNG
-                 --spawn <dir>  write a child if the proof checks
-                 --build        compile that child
-                 --force        overwrite a previous child
-                 --write        update src/main.rs if the proof checks
-demostrante dish                  animate a cell and a seal
-                 --steps N      search steps (default 120)
-                 --lambda L     mutants per step (default 30)
-                 --seed S       default 7 (the reliable demo)
-                 --delay MS     ms per frame (default 80)
-demostrante spawn <dir>           copy the current genome (no claim)
-demostrante genome                print the embedded sources
+demostrante identity              generación, linaje, padre, prueba, puntaje
+demostrante eval [x]              cerebro vs la función objetivo
+demostrante prove [expr]          verifica la prueba de este individuo, o de un candidato
+demostrante evolve                busca un cerebro mejor
+                 --steps N      pasos de búsqueda (default 120)
+                 --lambda L     mutantes por paso (default 30)
+                 --seed S       rng reproducible
+                 --spawn <dir>  hijo con el campeón, si la prueba cierra
+                 --build        compila a ese hijo
+                 --force        pisa un hijo anterior
+                 --write        pisa src/main.rs, si la prueba cierra
+demostrante dish                  anima una célula y un sello
+                 --steps N      pasos de búsqueda (default 120)
+                 --lambda L     mutantes por paso (default 30)
+                 --seed S       default 7 (la demo fiable)
+                 --delay MS     ms por cuadro (default 80)
+demostrante spawn <dir>           copia el genoma actual (sin afirmar mejora)
+demostrante genome                imprime las fuentes embebidas
 ```
 
-## How it works
+## Cómo funciona
 
-The brain lives in a constant in `src/main.rs`. So do the parent brain and the proof string.
+El cerebro vive en una constante de `src/main.rs`. También el cerebro padre y el string de la prueba.
 
-1. Parse the current brain into a tree.
-2. Each step makes several random mutants. Keep the lowest `sse + 0.01 × size`.
-3. After a perfect fit, algebraic identities may shrink the expression.
-4. A proof of `A → B` holds if, on `x = -5 … 5`, `sse(B) < sse(A)`, or the sse is equal and `B` is smaller.
-5. `--spawn` / `--write` re-evaluate that claim. Only then do they patch `BRAIN`, `PARENT_BRAIN`, and `PROOF`.
+1. Parsea el cerebro actual a un árbol.
+2. Cada paso arma varios mutantes al azar. Se queda con el menor `sse + 0.01 × tamaño`.
+3. Después de un encaje perfecto, las identidades algebraicas pueden achicar la expresión.
+4. Una prueba de `A → B` vale si, en `x = -5 … 5`, `sse(B) < sse(A)`, o el sse es igual y `B` es más chico.
+5. `--spawn` / `--write` reevalúan esa afirmación. Recién ahí parchean `BRAIN`, `PARENT_BRAIN` y `PROOF`.
 
-The scoring function never changes. This is not a Red Queen: the world stays still. It is not Schmidhuber's Gödel Machine: there is no general theorem prover. The certificate is the 11 points.
+La función de puntaje no cambia nunca. Esto no es Reina Roja: el mundo se queda quieto. No es la Gödel Machine de Schmidhuber: no hay un demostrador general. El certificado son los 11 puntos.
 
-## Safety
+## Seguridad
 
-- One child per run. No background loops, no network.
-- It will not write over your home directory, `/`, `/usr`, `/etc`, or the directory you are standing in.
-- `--force` only deletes a folder that already looks like a `demostrante` project.
-- A copy (`spawn` without search) does not need a proof. A claimed improvement does.
+- Un hijo por corrida. No hay bucles en segundo plano ni red.
+- No escribe sobre el directorio home, `/`, `/usr`, `/etc`, ni el directorio en el que estás parado.
+- `--force` sólo borra una carpeta que ya parece un proyecto `demostrante`.
+- Una copia (`spawn` sin búsqueda) no pide prueba. Una mejora afirmada sí.
 
-## Related
+## Relacionados
 
-[replicante](https://github.com/PascualMacana/replicante) copies itself.  
-[mejorante](https://github.com/PascualMacana/mejorante) copies itself and also tries to improve, without asking for a proof.  
-[reinante](https://github.com/PascualMacana/reinante) keeps searching because the scoring function itself moves.  
-[cruzante](https://github.com/PascualMacana/cruzante) keeps the river crossings that were still legal.
+[replicante](https://github.com/PascualMacana/replicante) se copia.  
+[mejorante](https://github.com/PascualMacana/mejorante) se copia y además intenta mejorar, sin pedir prueba.  
+[reinante](https://github.com/PascualMacana/reinante) sigue buscando porque la función de puntaje misma se mueve.  
+[cruzante](https://github.com/PascualMacana/cruzante) se queda con los cruces del río que todavía eran legales.
