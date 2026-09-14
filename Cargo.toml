@@ -2,7 +2,7 @@
 name = "demostrante"
 version = "0.1.0"
 edition = "2021"
-description = "Constructor que sólo se reescribe si hay una prueba de que mejora."
+description = "A constructor that only rewrites itself when a proof says it improved."
 license = "MIT"
 publish = false
 repository = "https://github.com/PascualMacana/demostrante"
