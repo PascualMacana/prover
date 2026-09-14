@@ -4,7 +4,7 @@ A small Rust program that searches for a better piece of its own source, then **
 
 It is not a language model and it does not spread by itself. You point it at a folder; it only writes there.
 
-It is a sibling of [mejorante](https://github.com/PascualMacana/mejorante). Darwin still proposes (random mutants, frozen scoring). Gödel accepts: a child is born because a certificate checks, not because the searcher got lucky.
+It is a sibling of [improver](https://github.com/PascualMacana/improver). Darwin still proposes (random mutants, frozen scoring). Gödel accepts: a child is born because a certificate checks, not because the searcher got lucky.
 
 The part that evolves is a tiny math expression called the **brain**. The program tries to match this function:
 
@@ -98,7 +98,7 @@ The scoring function never changes. This is not a Red Queen: the world stays sti
 
 ## Related
 
-[replicante](https://github.com/PascualMacana/replicante) copies itself.  
-[mejorante](https://github.com/PascualMacana/mejorante) copies itself and also tries to improve, without asking for a proof.  
-[reinante](https://github.com/PascualMacana/reinante) keeps searching because the scoring function itself moves.  
-[cruzante](https://github.com/PascualMacana/cruzante) keeps the river crossings that were still legal.
+[replicator](https://github.com/PascualMacana/replicator) copies itself.  
+[improver](https://github.com/PascualMacana/improver) copies itself and also tries to improve, without asking for a proof.  
+[red-queen](https://github.com/PascualMacana/red-queen) keeps searching because the scoring function itself moves.  
+[crosser](https://github.com/PascualMacana/crosser) keeps the river crossings that were still legal.

@@ -5,7 +5,7 @@ edition = "2021"
 description = "A constructor that only rewrites itself when a proof says it improved."
 license = "MIT"
 publish = false
-repository = "https://github.com/PascualMacana/demostrante"
+repository = "https://github.com/PascualMacana/prover"
 
 [[bin]]
 name = "demostrante"
