@@ -105,4 +105,5 @@ The scoring function never changes. This is not a Red Queen: the world stays sti
 [inquirer](https://github.com/PascualMacana/inquirer) keeps the house assignments the clues did not refute.  
 [tide](https://github.com/PascualMacana/tide) keeps searching because the river's rules hop.  
 [sealer](https://github.com/PascualMacana/sealer) only writes a river plan when a proof says it improved.  
-[turn](https://github.com/PascualMacana/turn) keeps searching because the house clues hop.
+[turn](https://github.com/PascualMacana/turn) keeps searching because the house clues hop.  
+[closer](https://github.com/PascualMacana/closer) only writes a house assignment when a proof says it improved.
